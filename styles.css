@@ -1,0 +1,282 @@
+/* 13 Days to Escape Guide — unofficial fan site
+   Plain CSS, no build step. Mobile-first, readable, fast. */
+
+:root {
+  --bg: #f6f3ee;
+  --bg-card: #fffdf9;
+  --ink: #1c1917;
+  --muted: #57534e;
+  --line: #e7e0d6;
+  --accent: #9a3412;
+  --accent-dark: #7c2d12;
+  --notice-bg: #f5efe4;
+  --ok-bg: #ecf4e8;
+  --ok-ink: #1e3a2f;
+  --warn-bg: #f8efe3;
+  --warn-ink: #7c4a12;
+  --status-bg: #f3eee6;
+  --max: 44rem;
+  --radius: 10px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+.skip {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--ink);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  z-index: 20;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+
+.wrap {
+  width: min(100% - 2rem, var(--max));
+  margin-inline: auto;
+}
+
+/* Header */
+.site-header {
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-card);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  flex-wrap: wrap;
+}
+.logo {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  text-decoration: none;
+  line-height: 1.25;
+}
+.logo span {
+  display: block;
+  font-weight: 500;
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.9rem;
+}
+nav a {
+  color: var(--ink);
+  text-decoration: none;
+  padding: 0.25rem 0;
+  border-bottom: 2px solid transparent;
+}
+nav a:hover,
+nav a[aria-current="page"] {
+  border-bottom-color: var(--accent);
+}
+nav a.soon {
+  color: var(--muted);
+}
+
+/* Notice */
+.notice {
+  background: var(--notice-bg);
+  border-bottom: 1px solid var(--line);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.85rem;
+  color: var(--muted);
+  padding: 0.65rem 0;
+}
+.notice .wrap { text-align: center; }
+
+/* Main */
+main { padding: 1.75rem 0 3rem; }
+
+h1, h2, h3 {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.25;
+  font-weight: 700;
+}
+h1 { font-size: clamp(1.6rem, 4vw, 2.1rem); margin: 0 0 0.75rem; }
+h2 {
+  font-size: 1.25rem;
+  margin: 2.25rem 0 0.75rem;
+  padding-top: 0.25rem;
+  border-top: 1px solid var(--line);
+}
+h2:first-of-type { border-top: 0; padding-top: 0; }
+h3 { font-size: 1.05rem; margin: 1.4rem 0 0.4rem; }
+
+p, ul, ol { margin: 0 0 1rem; }
+ul, ol { padding-left: 1.25rem; }
+li { margin-bottom: 0.35rem; }
+a { color: var(--accent-dark); }
+a:hover { color: var(--accent); }
+
+.lead { font-size: 1.12rem; }
+.meta-line {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 1.25rem;
+}
+
+/* Cards / callouts */
+.callout {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem 1.1rem;
+  margin: 0 0 1.25rem;
+}
+.callout.update {
+  border-left: 4px solid var(--accent);
+}
+.callout.status {
+  background: var(--status-bg);
+  text-align: center;
+  padding: 1.25rem 1rem;
+}
+.callout.status strong {
+  display: block;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.2rem;
+  margin-bottom: 0.35rem;
+}
+.callout.note {
+  background: var(--warn-bg);
+  color: var(--warn-ink);
+  font-size: 0.95rem;
+}
+.callout.ok {
+  background: var(--ok-bg);
+  color: var(--ok-ink);
+}
+.callout p:last-child,
+.callout ul:last-child { margin-bottom: 0; }
+.callout h2 { border: 0; margin-top: 0; padding-top: 0; }
+
+/* Tables */
+.table-wrap { overflow-x: auto; margin: 0 0 1.25rem; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  background: var(--bg-card);
+}
+th, td {
+  text-align: left;
+  padding: 0.55rem 0.7rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+th {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  font-weight: 600;
+  background: #f3eee6;
+}
+
+.steps { counter-reset: step; list-style: none; padding-left: 0; }
+.steps li {
+  position: relative;
+  padding-left: 2.2rem;
+  margin-bottom: 0.7rem;
+}
+.steps li::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0.1rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.faq details {
+  border-bottom: 1px solid var(--line);
+  padding: 0.7rem 0;
+}
+.faq summary {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+}
+.faq details p { margin: 0.5rem 0 0.25rem; }
+
+.page-nav {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1.25rem 0 0;
+}
+@media (min-width: 560px) {
+  .page-nav { grid-template-columns: 1fr 1fr; }
+}
+.page-nav a {
+  display: block;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.9rem 1rem;
+  text-decoration: none;
+  color: var(--ink);
+}
+.page-nav a:hover { border-color: var(--accent); }
+.page-nav a strong {
+  display: block;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--accent-dark);
+  margin-bottom: 0.15rem;
+}
+.page-nav a span {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid var(--line);
+  background: var(--bg-card);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.85rem;
+  color: var(--muted);
+  padding: 1.5rem 0 2rem;
+}
+.site-footer p { margin: 0 0 0.5rem; }
+.site-footer p:last-child { margin-bottom: 0; }
